@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: 'flowerpot_metrics',
       routes: {
+        'home': (context) => CropsScreen(),
         'flowerpots': (context) => FlowerpotsScreen(),
         'potdetail': (context) => FlowerpotDetailScreen(),
         'flowerpot_metrics': (context) => FlowerpotMetricsScreen(),

@@ -48,13 +48,13 @@ class _FlowerpotMetricsScreenState extends State<FlowerpotMetricsScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.white),
+            icon: const Icon(Icons.arrow_back, color: Colors.black),
             iconSize: 36,
             onPressed: () => Navigator.of(context).pop(),
           ),
           const Text('CROP 1',
               style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontSize: 36,
                   fontWeight: FontWeight.bold)),
           Opacity(

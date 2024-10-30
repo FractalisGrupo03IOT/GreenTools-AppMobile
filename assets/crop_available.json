@@ -1,7 +1,7 @@
 [
   {
-    "plantName": "Monstera Deliciosa",
-    "plantImageUrl": "https://yorkshireflowerpots.co.uk/wp-content/uploads/2019/09/YFP_Medium_Heavy_Cylinder-928x826.jpg",
+    "cropName": "Monstera Deliciosa",
+    "cropImageUrl": "https://yorkshireflowerpots.co.uk/wp-content/uploads/2019/09/YFP_Medium_Heavy_Cylinder-928x826.jpg",
     "careIcons": {
       "temperature": "medio",
       "water": "alto",
@@ -11,8 +11,8 @@
     "recommendation": "Ideal para interiores con luz indirecta y riegos moderados, evitando el encharcamiento."
   },
   {
-    "plantName": "Fiddle Leaf Fig",
-    "plantImageUrl": "https://yorkshireflowerpots.co.uk/wp-content/uploads/2019/09/YFP_Medium_Heavy_Cylinder-928x826.jpg",
+    "cropName": "Fiddle Leaf Fig",
+    "cropImageUrl": "https://yorkshireflowerpots.co.uk/wp-content/uploads/2019/09/YFP_Medium_Heavy_Cylinder-928x826.jpg",
     "careIcons": {
       "temperature": "alto",
       "water": "medio",
@@ -22,8 +22,8 @@
     "recommendation": "Prefiere ambientes cálidos y húmedos con abundante luz natural."
   },
   {
-    "plantName": "Snake Plant",
-    "plantImageUrl": "https://yorkshireflowerpots.co.uk/wp-content/uploads/2019/09/YFP_Medium_Heavy_Cylinder-928x826.jpg",
+    "cropName": "Snake Plant",
+    "cropImageUrl": "https://yorkshireflowerpots.co.uk/wp-content/uploads/2019/09/YFP_Medium_Heavy_Cylinder-928x826.jpg",
     "careIcons": {
       "temperature": "bajo",
       "water": "bajo",

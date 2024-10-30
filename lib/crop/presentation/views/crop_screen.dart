@@ -68,12 +68,12 @@ class _CropScreenState extends State<CropsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "YOUR CROPS",
+                    "Your Crops",
                     style: TextStyle(
                       fontSize: 35,
                       fontWeight: FontWeight.w900,
                       letterSpacing: 1.2,
-                      color: Colors.white,
+                      color: Colors.black38,
                     ),
                   ),
                   SizedBox(height: 10),
@@ -82,8 +82,8 @@ class _CropScreenState extends State<CropsScreen> {
                     builder: (context, snapshotFuture) {
                       if (!snapshotFuture.hasData) return SizedBox();
                       List<CropInfo> userCrops =
-                          snapshotFuture.data![0].plants;
-                      return buildUserPlantsGridView(userCrops);
+                          snapshotFuture.data![0].crops;
+                      return buildUserCropssGridView(userCrops);
                     },
                   ),
                 ],
@@ -98,9 +98,9 @@ class _CropScreenState extends State<CropsScreen> {
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "MORE PLANTS",
+                      "More Crops",
                       style: TextStyle(
-                        fontSize: 35,
+                        fontSize: 20,
                         fontWeight: FontWeight.w900,
                         letterSpacing: 1.2,
                         color: Colors.black,
@@ -149,7 +149,7 @@ class _CropScreenState extends State<CropsScreen> {
     );
   }
 
-  Widget buildUserPlantsGridView(List<CropInfo> crops) {
+  Widget buildUserCropssGridView(List<CropInfo> crops) {
     return GridView.builder(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(), // Desactiva el scroll interno

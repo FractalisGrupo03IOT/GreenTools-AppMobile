@@ -55,7 +55,7 @@ class _FlowerpotDetailScreenState extends State<FlowerpotDetailScreen> {
             iconSize: 36,
             onPressed: () => Navigator.of(context).pop(),
           ),
-          const Text('POT 1',
+          const Text('Crop 1',
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 36,
