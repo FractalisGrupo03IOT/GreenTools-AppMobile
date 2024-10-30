@@ -13,11 +13,11 @@ class PlantChartsComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<ChartData> temperatureData = List.generate(
-        12, (index) => ChartData(index.toDouble(), 10 + index.toDouble()));
+        6, (index) => ChartData(index.toDouble(), 5 + index.toDouble()));
     final List<ChartData> humidityData = List.generate(
-        12, (index) => ChartData(index.toDouble(), 60 - index * 5));
+        6, (index) => ChartData(index.toDouble(), 30 - index * 2.5));
     final List<ChartData> uvData = List.generate(
-        12, (index) => ChartData(index.toDouble(), 2 + index.toDouble() / 2));
+        6, (index) => ChartData(index.toDouble(), 1 + index.toDouble() / 1));
 
     return Column(
       children: [
@@ -57,7 +57,7 @@ class ChartCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(10),
@@ -65,7 +65,7 @@ class ChartCard extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
+            padding: const EdgeInsets.only(bottom: 4.0),
             child: Text(title,
                 style: const TextStyle(
                     color: Colors.black,

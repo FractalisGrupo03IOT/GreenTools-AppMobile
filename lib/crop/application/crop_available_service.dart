@@ -6,7 +6,7 @@ class CropAvailableService {
 
   CropAvailableService(this._cropAvailableRepository);
 
-  Future<List<CropAvailable>> getAvailablePlants() async {
+  Future<List<CropAvailable>> getAvailableCrops() async {
     return await _cropAvailableRepository.getAvailableCrop();
   }
 }
