@@ -5,7 +5,6 @@ import 'package:greentools/crop/presentation/views/flowerpots_screen.dart';
 import 'package:greentools/crop/presentation/views/crop_screen.dart';
 import 'package:greentools/crop/presentation/views/flowerpot_detail_screen.dart';
 
-
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());

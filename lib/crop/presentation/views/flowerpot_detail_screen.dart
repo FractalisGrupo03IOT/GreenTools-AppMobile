@@ -57,7 +57,7 @@ class _FlowerpotDetailScreenState extends State<FlowerpotDetailScreen> {
           ),
           const Text('Crop 1',
               style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontSize: 36,
                   fontWeight: FontWeight.bold)),
           Opacity(

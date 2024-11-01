@@ -27,7 +27,7 @@ class CropInfoComponent extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.network(
-                    'https://ojo.pe/resizer/SWeUdUMtIFlYLaiRvd21MLLELnc=/1200x1200/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/BKVJFTCTUFEBDLRPZW46RBOW3A.png',
+                    'https://us.images.westend61.de/0001691190pw/primer-plano-vertical-de-un-hongo-ostra-comestible-MINF16552.jpg',
                     fit: BoxFit.cover,
                   ),
                 ),

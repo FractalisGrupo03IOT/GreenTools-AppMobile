@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greentools/common/widgets/horizontal_background_painter.dart';
 import 'package:greentools/common/widgets/navigation_appbar.dart';
 import 'package:greentools/crop/presentation/widgets/flowerpot_dashboard.dart';
 import 'package:greentools/crop/presentation/widgets/flowerpot_info.dart';
@@ -24,6 +25,7 @@ class _FlowerpotMetricsScreenState extends State<FlowerpotMetricsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomPaint(
+        painter: HorizontalBackgroundPainter(),
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[

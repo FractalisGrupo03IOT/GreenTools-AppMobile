@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:greentools/crop/domain/user.dart';
+import 'package:greentools/crop/domain/inventory.dart';
 
 class CardCrop extends StatelessWidget {
-  final CropInfo cropInfo;
+  final Inventory station;
   final VoidCallback? onTap;
 
-  const CardCrop({Key? key, required this.cropInfo, this.onTap})
+  const CardCrop({Key? key, required this.station, this.onTap})
       : super(key: key);
 
   // Función que retorna un color basado en la entrada de cuidados de la planta
-  Color _getColor(String careValue) {
+  Color _getColor(int careValue) {
     switch (careValue) {
-      case 'alto':
+      case 1.0:
         return Colors.red;
-      case 'medio':
+      case 2.0:
         return Colors.orange;
-      case 'bajo':
+      case 3.0:
         return Colors.lightGreen;
       default:
         return Colors.grey;
@@ -37,7 +37,7 @@ class CardCrop extends StatelessWidget {
                   borderRadius: BorderRadius.vertical(
                       top: Radius.circular(15), bottom: Radius.circular(15)),
                   child: Image.network(
-                    cropInfo.cropImageUrl,
+                    'https://us.images.westend61.de/0001691190pw/primer-plano-vertical-de-un-hongo-ostra-comestible-MINF16552.jpg',
                     fit: BoxFit.cover,
                     width: double.infinity,
                   ),
@@ -55,19 +55,16 @@ class CardCrop extends StatelessWidget {
                           .spaceEvenly, // Distribuir íconos equitativamente
                       children: [
                         Icon(Icons.thermostat,
-                            color: _getColor(cropInfo.careIcons[
-                            'temperature']!)), // Icono de temperatura
+                            color: _getColor(station.temperature)), // Icono de temperatura
                         Icon(Icons.opacity,
-                            color: _getColor(cropInfo
-                                .careIcons['water']!)), // Icono de agua
+                            color: _getColor(station.humidity)), // Icono de agua
                         Icon(Icons.wb_sunny,
-                            color: _getColor(cropInfo
-                                .careIcons['sunlight']!)), // Icono de luz solar
+                            color: _getColor(station.uvSolar)), // Icono de luz solar
                       ],
                     ),
                     SizedBox(height: 5), // Add top margin
                     Text(
-                      cropInfo.cropName,
+                      station.stationName,
                       textAlign: TextAlign
                           .center, // Asegurar que el texto esté centrado
                       style: TextStyle(

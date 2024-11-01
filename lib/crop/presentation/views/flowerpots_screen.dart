@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:greentools/common/widgets/horizontal_background_painter.dart';
 import 'package:greentools/common/widgets/navigation_appbar.dart';
+import 'package:greentools/crop/domain/inventory.dart';
 import 'package:greentools/crop/presentation/views/flowerpot_detail_screen.dart';
 import 'package:greentools/crop/presentation/widgets/top_bar.dart';
 import 'package:greentools/crop/domain/user.dart';
 import 'package:greentools/crop/presentation/widgets/card_crop.dart';
-import 'package:greentools/crop/infrastructure/user_repository.dart';
+import 'package:greentools/crop/application/user_service.dart';
+import 'package:greentools/crop/application/inventory_service.dart';
 
 class FlowerpotsScreen extends StatefulWidget {
   @override
@@ -13,6 +16,8 @@ class FlowerpotsScreen extends StatefulWidget {
 
 class _FlowerpotsScreenState extends State<FlowerpotsScreen> {
   int _selectedIndex = 0;
+  late Future<User?> _user;
+  late Future<List<Inventory>?> _stations;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -21,12 +26,14 @@ class _FlowerpotsScreenState extends State<FlowerpotsScreen> {
   }
 
   Future<User>? user;
+  Future<List<Inventory>>? stations;
+
 
   @override
   void initState() {
     super.initState();
-    UserRepository userRepository = UserRepository();
-    user = userRepository.getUser();
+    _user = UserService().getUserById(1); // Cambia el ID según tu lógica
+    _stations = InventoryService().getInventoriesByUserId(1); // Cambia el ID según tu lógica
   }
 
   @override
@@ -34,6 +41,7 @@ class _FlowerpotsScreenState extends State<FlowerpotsScreen> {
     return Scaffold(
       appBar: TopBar(),
       body: CustomPaint(
+        painter: HorizontalBackgroundPainter(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -50,12 +58,12 @@ class _FlowerpotsScreenState extends State<FlowerpotsScreen> {
               ),
             ),
             Expanded(
-              child: FutureBuilder<User>(
-                future: user,
+              child: FutureBuilder<List<Inventory>>(
+                future: stations,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     if (snapshot.hasData) {
-                      int itemCount = snapshot.data!.crops.length +
+                      int itemCount = snapshot.data!.length +
                           1; // +1 para el botón de '+'
                       return GridView.builder(
                         padding: EdgeInsets.symmetric(horizontal: 15),
@@ -67,9 +75,9 @@ class _FlowerpotsScreenState extends State<FlowerpotsScreen> {
                         ),
                         itemCount: itemCount,
                         itemBuilder: (context, index) {
-                          if (index < snapshot.data!.crops.length) {
+                          if (index < snapshot.data!.length) {
                             return CardCrop(
-                              cropInfo: snapshot.data!.crops[index],
+                              station: snapshot.data![index],
                               onTap: () {
                                 Navigator.push(
                                   context,

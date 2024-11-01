@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:greentools/crop/domain/crop_available.dart';
+import 'package:greentools/crop/domain/inventory.dart';
 
 class CropDetailScreen extends StatelessWidget {
-  final CropAvailable crop;
+  final Inventory crop;
 
   const CropDetailScreen({Key? key, required this.crop}) : super(key: key);
 
@@ -10,14 +10,14 @@ class CropDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(crop.cropName),
+        title: Text(crop.stationName),
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Image.network(
-              crop.cropImageUrl,
+              'https://us.images.westend61.de/0001691190pw/primer-plano-vertical-de-un-hongo-ostra-comestible-MINF16552.jpg',
               fit: BoxFit.cover,
             ),
             Container(
@@ -28,7 +28,7 @@ class CropDetailScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 16.0),
                     child: Text(
-                      crop.cropName,
+                      crop.plant,
                       style:
                           TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
                     ),
@@ -36,60 +36,25 @@ class CropDetailScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 5.0, left: 14),
-              child: Text(
-                "Description:",
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(14.0),
-              child: Text(
-                crop.description,
-                style: TextStyle(fontSize: 16),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 14.0, left: 14),
-              child: Text(
-                "Recommendations:",
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(14.0),
-              child: Text(
-                crop.recommendation,
-                style: TextStyle(fontSize: 16),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 14.0, left: 14),
-              child: Text(
-                "Care Instructions:",
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-            ),
             ListTile(
               leading: Icon(Icons.wb_sunny),
               title: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text("Sunlight: ${crop.careIcons['sunlight']}"),
+                child: Text("Sunlight: ${crop.uvSolar}"),
               ),
             ),
             ListTile(
               leading: Icon(Icons.thermostat_outlined),
               title: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text("Temperature: ${crop.careIcons['temperature']}"),
+                child: Text("Temperature: ${crop.temperature}"),
               ),
             ),
             ListTile(
               leading: Icon(Icons.opacity),
               title: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text("Water: ${crop.careIcons['water']}"),
+                child: Text("Water: ${crop.humidity}"),
               ),
             ),
             //insert a buttom

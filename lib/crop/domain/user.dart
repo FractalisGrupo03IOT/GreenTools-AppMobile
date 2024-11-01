@@ -1,47 +1,79 @@
-class CropInfo {
-  final String cropName;
-  final String cropImageUrl;
-  final Map<String, String> careIcons;
+class User {
+  final int id;
+  final Name name;
+  final Email email;
+  final Address address;
 
-  CropInfo({
-    required this.cropName,
-    required this.cropImageUrl,
-    required this.careIcons,
+  User({
+    required this.id,
+    required this.name,
+    required this.email,
+    required this.address,
   });
 
-  factory CropInfo.fromJson(Map<String, dynamic> json) {
-    return CropInfo(
-      cropName: json['cropName'],
-      cropImageUrl: json['cropImageUrl'],
-      careIcons: Map<String, String>.from(json['careIcons']),
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+      id: json['id'],
+      name: Name.fromJson(json['name']),
+      email: Email.fromJson(json['email']),
+      address: Address.fromJson(json['address']),
     );
   }
 }
 
-class User {
+class Name {
   final String firstName;
   final String lastName;
-  final String greeting;
-  final String profileImageUrl;
-  final List<CropInfo> crops;
 
-  User({
+  Name({
     required this.firstName,
     required this.lastName,
-    required this.greeting,
-    required this.profileImageUrl,
-    required this.crops,
   });
 
-  factory User.fromJson(Map<String, dynamic> json) {
-    List<CropInfo> crops =
-    (json['crops'] as List).map((i) => CropInfo.fromJson(i)).toList();
-    return User(
+  factory Name.fromJson(Map<String, dynamic> json) {
+    return Name(
       firstName: json['firstName'],
       lastName: json['lastName'],
-      greeting: json['greeting'],
-      profileImageUrl: json['profileImageUrl'],
-      crops: crops,
+    );
+  }
+}
+
+class Email {
+  final String address;
+
+  Email({
+    required this.address,
+  });
+
+  factory Email.fromJson(Map<String, dynamic> json) {
+    return Email(
+      address: json['address'],
+    );
+  }
+}
+
+class Address {
+  final String street;
+  final String number;
+  final String city;
+  final String zipCode;
+  final String country;
+
+  Address({
+    required this.street,
+    required this.number,
+    required this.city,
+    required this.zipCode,
+    required this.country,
+  });
+
+  factory Address.fromJson(Map<String, dynamic> json) {
+    return Address(
+      street: json['street'],
+      number: json['number'],
+      city: json['city'],
+      zipCode: json['zipCode'],
+      country: json['country'],
     );
   }
 }
