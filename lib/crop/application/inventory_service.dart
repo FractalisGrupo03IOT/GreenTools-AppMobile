@@ -45,4 +45,9 @@ class InventoryService {
       throw Exception("Error al obtener la lista de inventarios por userId: $e");
     }
   }
+
+  // Método para obtener todos los inventarios del APIFake
+  Future<List<Inventory>> getFakeInventories() async {
+    return await _inventoryRepository.getFakeInventories();
+  }
 }

@@ -24,6 +24,7 @@ class _CropScreenState extends State<CropsScreen> {
   late StreamController<String> searchStreamController;
   late Future<User?> _user;
   late Future<List<Inventory>>? _stations;
+  late Future<List<Inventory>?> _stationsFake;
 
   void _onItemTapped(int index) {
     if (_selectedIndex != index) {
@@ -41,6 +42,7 @@ class _CropScreenState extends State<CropsScreen> {
     searchStreamController = StreamController<String>.broadcast();
     _user = UserService().getUserById(1);
     _stations = InventoryService().getInventoriesByUserId(1);
+    _stationsFake = InventoryService().getFakeInventories();
 
     searchController.addListener(() {
       searchStreamController.add(searchController.text.toLowerCase());
@@ -79,11 +81,11 @@ class _CropScreenState extends State<CropsScreen> {
                   ),
                   SizedBox(height: 10),
                   FutureBuilder<List<dynamic>>(
-                    future: Future.wait([_user]),
+                    future: Future.wait([_stationsFake]),
                     builder: (context, snapshotFuture) {
                       if (!snapshotFuture.hasData) return SizedBox();
-                      List<Inventory> userCrops = snapshotFuture.data![0].crop;
-                      return buildUserCropssGridView(userCrops);
+                      List<Inventory> stations = snapshotFuture.data![0];
+                      return buildUserCropsGridView(stations);
                     },
                   ),
                 ],
@@ -129,7 +131,7 @@ class _CropScreenState extends State<CropsScreen> {
               builder: (context, snapshot) {
                 // Aquí pasamos snapshot.data ?? "" que es el valor actual del searchQuery
                 return FutureBuilder<List<dynamic>>(
-                  future: Future.wait([_user]),
+                  future: Future.wait([_stationsFake]),
                   builder: (context, snapshotFuture) {
                     if (!snapshotFuture.hasData) return SizedBox();
                     List<Inventory> crops = snapshotFuture.data![1];
@@ -149,7 +151,7 @@ class _CropScreenState extends State<CropsScreen> {
     );
   }
 
-  Widget buildUserCropssGridView(List<Inventory> crops) {
+  Widget buildUserCropsGridView(List<Inventory> station) {
     return GridView.builder(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(), // Desactiva el scroll interno
@@ -159,10 +161,10 @@ class _CropScreenState extends State<CropsScreen> {
         mainAxisSpacing: 10,
         childAspectRatio: 0.8,
       ),
-      itemCount: crops.length,
+      itemCount: station.length,
       itemBuilder: (context, index) {
         return CardCropSimple(
-          cropInfo: crops[index],
+          cropInfo: station[index],
           onTap: () {
             // Implementación del onTap si es necesario
           },
@@ -171,11 +173,10 @@ class _CropScreenState extends State<CropsScreen> {
     );
   }
 
-  Widget buildAvailableCropsGridView(
-      List<Inventory> crop, String searchQuery) {
-    List<Inventory> filteredCrops = crop.where((crop) {
-      return crop.plant.toLowerCase().contains(searchQuery) ||
-          crop.plant.toLowerCase().contains(searchQuery);
+  Widget buildAvailableCropsGridView(List<Inventory> station, String searchQuery) {
+    List<Inventory> filteredPlants = station.where((station) {
+      return station.stationName.toLowerCase().contains(searchQuery) ||
+          station.plant.toLowerCase().contains(searchQuery);
     }).toList();
 
     return GridView.builder(
@@ -187,15 +188,15 @@ class _CropScreenState extends State<CropsScreen> {
         mainAxisSpacing: 10,
         childAspectRatio: 0.8,
       ),
-      itemCount: filteredCrops.length,
+      itemCount: filteredPlants.length,
       itemBuilder: (context, index) {
         return CardCropAvailable(
-          cropAvailable: filteredCrops[index],
-          onTap: (crop) {
+          cropAvailable: filteredPlants[index],
+          onTap: (station) {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => CropDetailScreen(crop: crop,)),
+                  builder: (context) => CropDetailScreen(crop: station)),
             );
           },
         );

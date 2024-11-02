@@ -1,26 +1,23 @@
 {
-    "firstName": "Name",
-    "lastName": "LastName",
-    "greeting": "Good morning 👋",
-    "profileImageUrl": "https://pub-static.fotor.com/assets/projects/pages/d5bdd0513a0740a8a38752dbc32586d0/fotor-03d1a91a0cec4542927f53c87e0599f6.jpg",
-    "crops": [
+    "id": "0",
+    "name": [
         {
-            "cropName": "Flowerpot 1",
-            "cropImageUrl": "https://yorkshireflowerpots.co.uk/wp-content/uploads/2019/09/YFP_Medium_Heavy_Cylinder-928x826.jpg",
-            "careIcons": {
-                "temperature": "alto",
-                "water": "bajo",
-                "sunlight": "medio"
-            }
-        },
+            "firstName": "Pepe",
+            "lastName": "Grillo"
+        }
+    ],
+    "email": [
         {
-            "cropName": "Flowerpot 2",
-            "cropImageUrl": "https://www.hawleygardencentre.co.uk/shop//User/Products/LrgImg/Outdoor%20Living/Planters%20and%20Pots/Terracotta%20Pots/80355-Terra-Large-Flower-Pot.jpg",
-            "careIcons": {
-                "temperature": "bajo",
-                "water": "alto",
-                "sunlight": "medio"
-            }
+            "address": "pep123@hotmail.es"
+        }
+    ],
+    "address": [
+        {
+            "street": "n",
+            "number": "n",
+            "city": "n",
+            "zipCode": "n",
+            "country": "n"
         }
     ]
 }

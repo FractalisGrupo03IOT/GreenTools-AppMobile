@@ -18,6 +18,7 @@ class _FlowerpotsScreenState extends State<FlowerpotsScreen> {
   int _selectedIndex = 0;
   late Future<User?> _user;
   late Future<List<Inventory>?> _stations;
+  late Future<List<Inventory>?> _stationsFake;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -27,6 +28,7 @@ class _FlowerpotsScreenState extends State<FlowerpotsScreen> {
 
   Future<User>? user;
   Future<List<Inventory>>? stations;
+  Future<List<Inventory>>? stationsFake;
 
 
   @override
@@ -34,6 +36,7 @@ class _FlowerpotsScreenState extends State<FlowerpotsScreen> {
     super.initState();
     _user = UserService().getUserById(1); // Cambia el ID según tu lógica
     _stations = InventoryService().getInventoriesByUserId(1); // Cambia el ID según tu lógica
+    _stationsFake = InventoryService().getFakeInventories();
   }
 
   @override
@@ -57,9 +60,10 @@ class _FlowerpotsScreenState extends State<FlowerpotsScreen> {
                 ),
               ),
             ),
+
             Expanded(
               child: FutureBuilder<List<Inventory>>(
-                future: stations,
+                future: stationsFake,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     if (snapshot.hasData) {

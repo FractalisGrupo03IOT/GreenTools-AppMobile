@@ -4,6 +4,8 @@ import 'package:greentools/crop/presentation/views/flowerpot_metrics_screen.dart
 import 'package:greentools/crop/presentation/views/flowerpots_screen.dart';
 import 'package:greentools/crop/presentation/views/crop_screen.dart';
 import 'package:greentools/crop/presentation/views/flowerpot_detail_screen.dart';
+import 'package:greentools/crop/presentation/widgets/card_crop_simple.dart';
+
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      initialRoute: 'flowerpot_metrics',
+      initialRoute: 'flowerpots',
       routes: {
         'home': (context) => CropsScreen(),
         'flowerpots': (context) => FlowerpotsScreen(),

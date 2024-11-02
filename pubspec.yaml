@@ -74,7 +74,8 @@ flutter:
      - assets/Logo-greentools-inicio.png
      - assets/empty-notification-image.png
      - assets/NotFound.png
-
+     - assets/user.json
+     - assets/crop_available.json
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

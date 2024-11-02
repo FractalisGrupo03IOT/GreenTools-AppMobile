@@ -36,4 +36,8 @@ class UserService {
       throw Exception("Error al buscar usuarios por nombre: $e");
     }
   }
+  // Método para obtener todos los usuarios del APIFake
+  Future<User> getFakeUser() async {
+    return await _userRepository.getFakeUser();
+  }
 }
