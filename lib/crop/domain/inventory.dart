@@ -12,7 +12,7 @@ class Inventory {
     required this.stationName,
     required this.userId,
     required this.plant,
-    required this.temperature,
+    required this.temperature, 
     required this.uvSolar,
     required this.humidity,
   });
