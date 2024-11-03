@@ -8,7 +8,7 @@ class RecommendationComponent extends StatelessWidget {
     // Get screen width
     double screenWidth = MediaQuery.of(context).size.width;
 
-    return Container(
+    return Container( 
       margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.05, vertical: 0),
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
