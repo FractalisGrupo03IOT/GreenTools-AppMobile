@@ -7,7 +7,7 @@ import 'package:greentools/crop/presentation/widgets/top_bar.dart';
 import 'package:greentools/crop/domain/user.dart';
 import 'package:greentools/crop/presentation/widgets/card_crop.dart';
 import 'package:greentools/crop/application/user_service.dart';
-import 'package:greentools/crop/application/inventory_service.dart';
+import 'package:greentools/crop/application/inventory_service.dart'; 
 
 class FlowerpotsScreen extends StatefulWidget {
   @override
