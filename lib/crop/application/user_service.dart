@@ -3,7 +3,7 @@ import 'package:greentools/crop/domain/user.dart';
 import 'package:greentools/crop/infrastructure/user_repository.dart';
 
 class UserService {
-  final UserRepository _userRepository = UserRepository();
+  final UserRepository _userRepository = UserRepository(); 
 
   // Método para obtener todos los usuarios
   Future<List<User>> getAllUsers() async {
