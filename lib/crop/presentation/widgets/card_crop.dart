@@ -55,14 +55,14 @@ class CardCrop extends StatelessWidget {
                           .spaceEvenly, // Distribuir íconos equitativamente
                       children: [
                         Icon(Icons.thermostat,
-                            color: _getColor(station.temperature)), // Icono de temperatura
+                            color: _getColor(station.temperature)),  // Icono de temperatura
                         Icon(Icons.opacity,
-                            color: _getColor(station.humidity)), // Icono de agua
+                            color: _getColor(station.humidity)),  // Icono de agua
                         Icon(Icons.wb_sunny,
-                            color: _getColor(station.uvSolar)), // Icono de luz solar
+                            color: _getColor(station.uvSolar)),  // Icono de luz solar
                       ],
                     ),
-                    SizedBox(height: 5), // Add top margin
+                    SizedBox( height: 5), // Add top margin
                     Text(
                       station.stationName,
                       textAlign: TextAlign
