@@ -6,7 +6,7 @@ class InventoryService {
   final InventoryRepository _inventoryRepository = InventoryRepository();
 
   // Método para obtener todos los inventarios
-  Future<List<Inventory>> getAllInventories() async {
+  Future<List<Inventory>> getAllInventories() async { 
     try {
       return await _inventoryRepository.getInventories();
     } catch (e) {
