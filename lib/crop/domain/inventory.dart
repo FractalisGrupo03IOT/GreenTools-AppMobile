@@ -18,6 +18,7 @@ class Inventory {
   });
 
   factory Inventory.fromJson(Map<String, dynamic> json) {
+
     return Inventory(
       id: json['id'],
       stationName: json['stationName'],
