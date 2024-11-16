@@ -3,41 +3,25 @@ import 'package:greentools/crop/domain/user.dart';
 import 'package:greentools/crop/infrastructure/user_repository.dart';
 
 class UserService {
-  final UserRepository _userRepository = UserRepository();
+  final UserRepository repository = UserRepository();
 
-  // Método para obtener todos los usuarios
-  Future<List<User>> getAllUsers() async {
-    try {
-      return await _userRepository.getUsers();
-    } catch (e) {
-      throw Exception("Error al obtener la lista de usuarios: $e");
-    }
+  Future<List<User>> fetchAllUsers() {
+    return repository.getAllUsers();
   }
 
-  // Método para obtener un usuario por su ID
-  Future<User?> getUserById(int id) async {
-    try {
-      List<User> users = await _userRepository.getUsers();
-      return users.firstWhereOrNull((user) => user.id == id);
-    } catch (e) {
-      throw Exception("Error al obtener el usuario: $e");
-    }
+  Future<User> fetchUserById(int id) {
+    return repository.getUserById(id);
   }
 
-
-  // Método para buscar usuarios por nombre
-  Future<List<User>> searchUsersByName(String name) async {
-    try {
-      List<User> users = await _userRepository.getUsers();
-      return users
-          .where((user) => user.name.firstName.toLowerCase().contains(name.toLowerCase()) || user.name.lastName.toLowerCase().contains(name.toLowerCase()))
-          .toList();
-    } catch (e) {
-      throw Exception("Error al buscar usuarios por nombre: $e");
-    }
+  Future<void> addUser(User user) {
+    return repository.createUser(user);
   }
-  // Método para obtener todos los usuarios del APIFake
-  Future<User> getFakeUser() async {
-    return await _userRepository.getFakeUser();
+
+  Future<void> updateUser(int id, User user) {
+    return repository.updateUserById(id, user);
+  }
+
+  Future<void> removeUserById(int id) {
+    return repository.deleteUserById(id);
   }
 }

@@ -5,6 +5,8 @@ import 'package:greentools/crop/presentation/views/flowerpots_screen.dart';
 import 'package:greentools/crop/presentation/views/crop_screen.dart';
 import 'package:greentools/crop/presentation/views/flowerpot_detail_screen.dart';
 import 'package:greentools/crop/presentation/widgets/card_crop_simple.dart';
+import 'package:greentools/crop/presentation/views/home_screen.dart';
+import 'package:greentools/profile/presentation/views/welcome_screen.dart';
 
 
 void main() {
@@ -23,10 +25,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      initialRoute: 'flowerpots',
+      initialRoute: 'welcome',
       routes: {
-        'home': (context) => CropsScreen(),
-        'flowerpots': (context) => FlowerpotsScreen(),
+        'home': (context) => HomeScreen(),
+        'welcome': (context) => WelcomeScreen(),
+        /*'flowerpots': (context) => FlowerpotsScreen(),*/
         'potdetail': (context) => FlowerpotDetailScreen(),
         'flowerpot_metrics': (context) => FlowerpotMetricsScreen(),
       },

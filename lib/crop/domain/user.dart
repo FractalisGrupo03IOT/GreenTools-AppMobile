@@ -2,12 +2,14 @@ class User {
   final int id;
   final Name name;
   final Email email;
+  final String profileImage;
   final Address address;
 
   User({
     required this.id,
     required this.name,
     required this.email,
+    required this.profileImage,
     required this.address,
   });
 
@@ -16,8 +18,19 @@ class User {
       id: json['id'],
       name: Name.fromJson(json['name']),
       email: Email.fromJson(json['email']),
+      profileImage: json['profileImage'],
       address: Address.fromJson(json['address']),
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name.toJson(),
+      'email': email.toJson(),
+      'profileImage': profileImage,
+      'address': address.toJson(),
+    };
   }
 }
 
@@ -25,10 +38,7 @@ class Name {
   final String firstName;
   final String lastName;
 
-  Name({
-    required this.firstName,
-    required this.lastName,
-  });
+  Name({required this.firstName, required this.lastName});
 
   factory Name.fromJson(Map<String, dynamic> json) {
     return Name(
@@ -36,19 +46,30 @@ class Name {
       lastName: json['lastName'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'firstName': firstName,
+      'lastName': lastName,
+    };
+  }
 }
 
 class Email {
   final String address;
 
-  Email({
-    required this.address,
-  });
+  Email({required this.address});
 
   factory Email.fromJson(Map<String, dynamic> json) {
     return Email(
       address: json['address'],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'address': address,
+    };
   }
 }
 
@@ -76,4 +97,15 @@ class Address {
       country: json['country'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'street': street,
+      'number': number,
+      'city': city,
+      'zipCode': zipCode,
+      'country': country,
+    };
+  }
 }
+

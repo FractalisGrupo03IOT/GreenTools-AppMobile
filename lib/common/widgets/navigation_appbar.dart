@@ -37,9 +37,9 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
 
   int? _getIndexFromRouteName(String? routeName) {
     final routes = {
-      'flowerpots': 0,
-      'addPot': 1,
-      'home': 2,
+      'stations': 0,
+      'upgrade': 1,
+      'notification': 2,
       'profile': 3,
     };
     return routes[routeName];
@@ -57,18 +57,19 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
         _navigateToScreen(index, context);
       },
       destinations: const [
-        NavigationDestination(icon: Icon(Icons.local_florist), label: 'Flowerpots'),
-        NavigationDestination(icon: Icon(Icons.add), label: 'Add'),
-        NavigationDestination(icon: Icon(Icons.nature), label: 'Plants'),
+        NavigationDestination(icon: Icon(Icons.location_city), label: 'Stations'),
+        NavigationDestination(icon: Icon(Icons.upgrade), label: 'Upgrade'),
+        NavigationDestination(icon: Icon(Icons.notifications), label: 'Notification'),
         NavigationDestination(icon: Icon(Icons.person), label: 'Profile'),
       ],
     );
   }
 
   void _navigateToScreen(int index, BuildContext context) {
-    final routes = ['flowerpots', 'addPot', 'home', 'profile'];
+    final routes = ['stations', 'upgrade', 'notification', 'profile'];
     if (ModalRoute.of(context)?.settings.name != routes[index]) {
       Navigator.pushNamed(context, routes[index]);
     }
   }
 }
+

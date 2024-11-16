@@ -9,6 +9,7 @@ import 'package:greentools/crop/presentation/widgets/card_crop.dart';
 import 'package:greentools/crop/application/user_service.dart';
 import 'package:greentools/crop/application/inventory_service.dart';
 
+/*
 class FlowerpotsScreen extends StatefulWidget {
   @override
   _FlowerpotsScreenState createState() => _FlowerpotsScreenState();
@@ -135,3 +136,4 @@ class _FlowerpotsScreenState extends State<FlowerpotsScreen> {
     );
   }
 }
+*/

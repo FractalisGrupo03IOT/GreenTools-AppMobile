@@ -13,6 +13,7 @@ import 'package:greentools/crop/application/user_service.dart';
 
 import '../../../common/widgets/horizontal_background_painter.dart';
 
+/*
 class CropsScreen extends StatefulWidget {
   @override
   _CropScreenState createState() => _CropScreenState();
@@ -204,3 +205,4 @@ class _CropScreenState extends State<CropsScreen> {
     );
   }
 }
+*/

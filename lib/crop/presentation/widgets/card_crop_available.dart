@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:greentools/crop/domain/inventory.dart';
-
+import 'package:greentools/crop/domain/crop_data.dart';
+import 'package:greentools/crop/domain/plant.dart';
+/*
 class CardCropAvailable extends StatelessWidget {
-  final Inventory cropAvailable;
+  final CropData cropInfoCare;
+  final Plant cropInfoPlant;
   final Function(Inventory) onTap;
 
   const CardCropAvailable(
@@ -45,4 +47,4 @@ class CardCropAvailable extends StatelessWidget {
       ),
     );
   }
-}
+}*/

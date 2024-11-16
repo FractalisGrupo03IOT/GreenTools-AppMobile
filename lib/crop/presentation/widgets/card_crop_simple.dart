@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:greentools/crop/domain/inventory.dart';
+import 'package:greentools/crop/domain/crop_data.dart';
+import 'package:greentools/crop/domain/plant.dart';
 
 class CardCropSimple extends StatelessWidget {
-  final Inventory cropInfo;
+  final CropData cropInfoCare;
+  final Plant cropInfoPlant;
   final VoidCallback? onTap;
 
-  const CardCropSimple({Key? key, required this.cropInfo, this.onTap})
+  const CardCropSimple({Key? key, required this.cropInfoCare, required this.cropInfoPlant , this.onTap})
       : super(key: key);
 
   @override
@@ -23,7 +25,7 @@ class CardCropSimple extends StatelessWidget {
                   borderRadius: BorderRadius.vertical(
                       top: Radius.circular(15), bottom: Radius.circular(15)),
                   child: Image.network(
-                    'https://us.images.westend61.de/0001691190pw/primer-plano-vertical-de-un-hongo-ostra-comestible-MINF16552.jpg',
+                    cropInfoPlant.plantImage,
                     fit: BoxFit.cover,
                     width: double.infinity,
                   ),
@@ -34,7 +36,7 @@ class CardCropSimple extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      cropInfo.stationName,
+                      cropInfoPlant.name,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
