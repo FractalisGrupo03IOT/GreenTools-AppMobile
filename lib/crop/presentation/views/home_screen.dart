@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:greentools/common/widgets/navigation_appbar.dart';
 import 'package:greentools/crop/presentation/widgets/top_bar.dart';
 import 'package:greentools/common/widgets/horizontal_background_painter.dart';
 import 'package:greentools/crop/application/station_service.dart';
-import 'package:greentools/crop/domain/station.dart';
-import 'package:greentools/common/utils/local_storage_service.dart';
 import 'package:greentools/crop/presentation/widgets/station_card.dart';
+import 'package:greentools/common/utils/local_storage_service.dart';
+import 'station_plants_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -14,30 +13,42 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final StationService _stationService = StationService();
+  final LocalStorageService _localStorageService = LocalStorageService();
+  List<Map<String, dynamic>> _stations = [];
+  bool _isLoading = true;
   int _selectedIndex = 0;
 
-  // Lista de estaciones simulada
-  final List<Map<String, String>> _stations =
-  [
-    {
-      "Id": "2",
-      "userId": "1",
-      "stationName": "GORENCITO",
-      "description": "MULTICULTIVO DE PLATANITOS ",
-      "stationImage": 'https://us.images.westend61.de/0001691190pw/primer-plano-vertical-de-un-hongo-ostra-comestible-MINF16552.jpg',
-      "startDate": "02-11-2024",
-      "endDate": "02-10-2025",
-    },
-    {
-      "Id": "9",
-      "userId": "1",
-      "stationName": "Station 1",
-      "description": "Microcultivo de Hongos",
-      "stationImage": 'https://us.images.westend61.de/0001691190pw/primer-plano-vertical-de-un-hongo-ostra-comestible-MINF16552.jpg',
-      "startDate": "16-11-2024",
-      "endDate": "16-11-2024",
+  @override
+  void initState() {
+    super.initState();
+    _loadStations();
+  }
+
+  Future<void> _loadStations() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      final user = await _localStorageService.getUser();
+      if (user != null && user['id'] != null) {
+        final userId = user['id'];
+        final stations = await _stationService.fetchStationsByUserId(userId);
+        setState(() {
+          _stations = stations.map((station) => station.toJson()).toList();
+        });
+      } else {
+        print("No user found or user ID is null.");
+      }
+    } catch (e) {
+      print("Error loading stations: $e");
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
     }
-  ];
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -51,12 +62,26 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: TopBar(),
       body: CustomPaint(
         painter: HorizontalBackgroundPainter(),
-        child: Column(
+        child: _isLoading
+            ? const Center(
+          child: CircularProgressIndicator(),
+        )
+            : Column(
           children: [
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: GridView.builder(
+                child: _stations.isEmpty
+                    ? const Center(
+                  child: Text(
+                    "No stations found.",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                )
+                    : GridView.builder(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2, // Dos columnas
                     crossAxisSpacing: 10,
@@ -66,11 +91,18 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemBuilder: (context, index) {
                     final station = _stations[index];
                     return StationCard(
-                      stationImage: station['stationImage']!,
-                      stationName: station['stationName']!,
+                      stationImage: station['stationImage'] ?? '',
+                      stationName: station['stationName'] ?? 'Unnamed Station',
                       onTap: () {
-                        // Acción al presionar la tarjeta
-                        print('Tapped on ${station['stationName']}');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => StationPlantsScreen(
+                              stationId: station['Id'],
+                              stationName: station['stationName'],
+                            ),
+                          ),
+                        );
                       },
                     );
                   },
@@ -98,4 +130,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
+
 

@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalStorageService {
@@ -9,54 +8,89 @@ class LocalStorageService {
 
   // Guardar el usuario actual como JSON
   Future<void> saveUser(Map<String, dynamic> user) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_userKey, jsonEncode(user));
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString(_userKey, jsonEncode(user));
+    } catch (e) {
+      print("Error saving user: $e");
+    }
   }
 
   // Obtener el usuario actual
-  Future<String?> getUser() async {
-    final prefs = await SharedPreferences.getInstance();
-    final userJson = prefs.getString(_userKey);
-    if (userJson != null) {
-      return jsonDecode(userJson);
+  Future<Map<String, dynamic>?> getUser() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final userJson = prefs.getString(_userKey);
+      if (userJson != null) {
+        return jsonDecode(userJson) as Map<String, dynamic>;
+      }
+    } catch (e) {
+      print("Error getting user: $e");
     }
     return null;
   }
 
   // Eliminar el usuario actual
   Future<void> removeUser() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.remove(_userKey);
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.remove(_userKey);
+    } catch (e) {
+      print("Error removing user: $e");
+    }
   }
 
   // Guardar el plantId actual
   Future<void> savePlantId(int plantId) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt(_plantIdKey, plantId);
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setInt(_plantIdKey, plantId);
+    } catch (e) {
+      print("Error saving plantId: $e");
+    }
   }
 
   // Obtener el plantId actual
   Future<int?> getPlantId() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getInt(_plantIdKey);
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      return prefs.getInt(_plantIdKey);
+    } catch (e) {
+      print("Error getting plantId: $e");
+    }
+    return null;
   }
 
   // Guardar el stationId actual
   Future<void> saveStationId(int stationId) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt(_stationIdKey, stationId);
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setInt(_stationIdKey, stationId);
+    } catch (e) {
+      print("Error saving stationId: $e");
+    }
   }
 
   // Obtener el stationId actual
   Future<int?> getStationId() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getInt(_stationIdKey);
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      return prefs.getInt(_stationIdKey);
+    } catch (e) {
+      print("Error getting stationId: $e");
+    }
+    return null;
   }
 
   // Eliminar todos los datos persistentes
   Future<void> clearAll() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.clear();
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.clear();
+    } catch (e) {
+      print("Error clearing all data: $e");
+    }
   }
 }
+
 

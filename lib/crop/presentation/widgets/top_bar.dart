@@ -1,16 +1,11 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:greentools/crop/application/user_service.dart';
-import 'package:greentools/crop/domain/user.dart';
 import 'package:greentools/common/utils/local_storage_service.dart';
 
 class TopBar extends StatelessWidget implements PreferredSizeWidget {
   final LocalStorageService _localStorageService;
-  final UserService _userService;
 
   TopBar({Key? key})
       : _localStorageService = LocalStorageService(),
-        _userService = UserService(),
         preferredSize = const Size.fromHeight(80.0),
         super(key: key);
 
@@ -20,7 +15,7 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Map<String, dynamic>?>(
-      future: _getOrFetchUser(),
+      future: _getUserFromLocalStorage(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return AppBar(
@@ -56,8 +51,7 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
             child: Row(
               children: [
                 const CircleAvatar(
-                  backgroundImage:
-                  AssetImage('assets/Logo-greentools-inicio.png'),
+                  backgroundImage: AssetImage('assets/Logo-greentools-inicio.png'),
                   radius: 25.0,
                 ),
                 const SizedBox(width: 10),
@@ -86,25 +80,13 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
-  Future<Map<String, dynamic>?> _getOrFetchUser() async {
-    // Intentar obtener el usuario desde el almacenamiento local
-    final userJson = await _localStorageService.getUser();
-    if (userJson != null) {
-      return jsonDecode(userJson);
-    }
-
-    // Si no hay usuario almacenado, obtenerlo desde el servicio
+  Future<Map<String, dynamic>?> _getUserFromLocalStorage() async {
     try {
-      final user = await _userService.fetchUserById(1); // Cambia el ID según sea necesario
-      if (user != null) {
-        // Guardar el usuario obtenido en el almacenamiento local
-        await _localStorageService.saveUser(user.toJson());
-        return user.toJson();
-      }
-    } catch (error) {
-      debugPrint("Error fetching user from service: $error");
+      return await _localStorageService.getUser();
+    } catch (e) {
+      print("Error retrieving user from LocalStorageService: $e");
+      return null;
     }
-
-    return null; // Si no se pudo obtener el usuario, retornar null
   }
 }
+
