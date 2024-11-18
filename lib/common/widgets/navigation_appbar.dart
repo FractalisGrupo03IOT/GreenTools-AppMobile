@@ -37,7 +37,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
 
   int? _getIndexFromRouteName(String? routeName) {
     final routes = {
-      'stations': 0,
+      'home': 0,
       'upgrade': 1,
       'notification': 2,
       'profile': 3,
@@ -66,7 +66,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
   }
 
   void _navigateToScreen(int index, BuildContext context) {
-    final routes = ['stations', 'upgrade', 'notification', 'profile'];
+    final routes = ['home', 'upgrade', 'notification', 'profile'];
     if (ModalRoute.of(context)?.settings.name != routes[index]) {
       Navigator.pushNamed(context, routes[index]);
     }

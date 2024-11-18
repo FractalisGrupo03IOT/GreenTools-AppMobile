@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalStorageService {
@@ -6,15 +8,19 @@ class LocalStorageService {
   static const String _stationIdKey = 'current_station_id';
 
   // Guardar el usuario actual como JSON
-  Future<void> saveUser(String userJson) async {
+  Future<void> saveUser(Map<String, dynamic> user) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_userKey, userJson);
+    await prefs.setString(_userKey, jsonEncode(user));
   }
 
   // Obtener el usuario actual
   Future<String?> getUser() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getString(_userKey);
+    final userJson = prefs.getString(_userKey);
+    if (userJson != null) {
+      return jsonDecode(userJson);
+    }
+    return null;
   }
 
   // Eliminar el usuario actual

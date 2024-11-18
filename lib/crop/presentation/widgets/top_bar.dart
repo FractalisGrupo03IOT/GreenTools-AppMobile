@@ -5,12 +5,12 @@ import 'package:greentools/crop/domain/user.dart';
 import 'package:greentools/common/utils/local_storage_service.dart';
 
 class TopBar extends StatelessWidget implements PreferredSizeWidget {
-  final UserService _userService;
   final LocalStorageService _localStorageService;
+  final UserService _userService;
 
   TopBar({Key? key})
-      : _userService = UserService(),
-        _localStorageService = LocalStorageService(),
+      : _localStorageService = LocalStorageService(),
+        _userService = UserService(),
         preferredSize = const Size.fromHeight(80.0),
         super(key: key);
 
@@ -19,7 +19,7 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<User?>(
+    return FutureBuilder<Map<String, dynamic>?>(
       future: _getOrFetchUser(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -32,7 +32,7 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
           return AppBar(
             automaticallyImplyLeading: false,
             title: const Text(
-              "Error loading user data",
+              "Error loading user",
               style: TextStyle(color: Colors.white),
             ),
             backgroundColor: const Color(0xFF3A785D),
@@ -41,7 +41,7 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
           return AppBar(
             automaticallyImplyLeading: false,
             title: const Text(
-              "User not found",
+              "No user found",
               style: TextStyle(color: Colors.white),
             ),
             backgroundColor: const Color(0xFF3A785D),
@@ -62,7 +62,7 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 const SizedBox(width: 10),
                 Text(
-                  'Good Day, ${user.name.firstName}!',
+                  'Hello, ${user['name']['firstName']}!',
                   style: const TextStyle(color: Colors.white, fontSize: 20),
                 ),
               ],
@@ -86,23 +86,25 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
-  Future<User?> _getOrFetchUser() async {
-    // Intentar obtener el usuario de la persistencia local
+  Future<Map<String, dynamic>?> _getOrFetchUser() async {
+    // Intentar obtener el usuario desde el almacenamiento local
     final userJson = await _localStorageService.getUser();
     if (userJson != null) {
-      return User.fromJson(jsonDecode(userJson));
+      return jsonDecode(userJson);
     }
 
-    // Si no hay usuario almacenado, obtenerlo del servicio
+    // Si no hay usuario almacenado, obtenerlo desde el servicio
     try {
-      final user = await _userService.fetchUserById(1);
+      final user = await _userService.fetchUserById(1); // Cambia el ID según sea necesario
       if (user != null) {
-        // Guardar el usuario en la persistencia local
-        await _localStorageService.saveUser(jsonEncode(user.toJson()));
+        // Guardar el usuario obtenido en el almacenamiento local
+        await _localStorageService.saveUser(user.toJson());
+        return user.toJson();
       }
-      return user;
-    } catch (e) {
-      return null;
+    } catch (error) {
+      debugPrint("Error fetching user from service: $error");
     }
+
+    return null; // Si no se pudo obtener el usuario, retornar null
   }
 }
