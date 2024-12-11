@@ -3,7 +3,7 @@ import 'package:greentools/common/widgets/navigation_appbar.dart';
 import 'package:greentools/loan/presentation/widgets/flowerpot_recomendation.dart';
 import 'package:greentools/crop/presentation/widgets/flowerpot_info.dart';
 
-class FlowerpotDetailScreen extends StatefulWidget {
+class FlowerpotDetailScreen extends StatefulWidget { 
   const FlowerpotDetailScreen({super.key});
 
   @override

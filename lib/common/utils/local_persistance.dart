@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalPersistance {
+
   static const String _currentUserKey = "currentUser";
   static const String _currentFlowerpotId = "currentFlowerpotId";
   static const String _currentCropTypeId = "currentCropTypeId";
